@@ -100,6 +100,10 @@ jobs:
           docker compose --file docker-compose.test.yml up --exit-code-from sut --timeout 10 --build
 
       # Step 10: Build and Push to both registries in a single step
+      - name: Set lowercase image name
+        run: |
+          echo "IMAGE_NAME=$(echo ${{ github.repository_owner }}/open-adalab-moodle | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV        
+      
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
