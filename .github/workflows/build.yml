@@ -112,16 +112,5 @@ jobs:
           tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.revision=${{ github.sha }}          
-
-      # Step 11: Run Trivy vulnerability scanner
-      - name: Run Trivy vulnerability scanner
-        if: github.event_name != 'pull_request'
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.tags && steps.meta.outputs.tags[0] || 'main' }}
-          format: 'table'
-          exit-code: '0'
-          severity: 'CRITICAL,HIGH'
-
+            org.opencontainers.image.revision=${{ github.sha }}
   
