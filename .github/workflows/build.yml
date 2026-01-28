@@ -13,6 +13,10 @@ on:
         description: 'Moodle version tag'
         required: true
 
+permissions:
+  packages: write
+  contents: read
+
 # Environment variables from secrets
 env:
   REGISTRY: ghcr.io
@@ -109,7 +113,7 @@ jobs:
         with:
           context: .
           push: true
-          tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          tags:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
